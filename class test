@@ -1,0 +1,31 @@
+london_crime =read.csv("london-crime-data.csv")
+View(london_crime)
+#structure of the dataset
+str(london_crime)
+london_crime$Date <- paste(london_crime$day, london_crime$month, london_crime$year, sep = "-")
+london_crime <- london_crime[, !names(london_crime) %in% c("day", "month", "year")]
+str(london_crime)
+
+
+
+
+
+london_crime <- london_crime[, c("borough", "major_category", "minor_category", "value", "Date")]
+names(london_crime) <- c("Borough", "MajorCategory", "SubCategory", "Value", "CrimeDate")
+str(london_crime)
+
+
+london_crime$CrimeDate <- as.Date(london_crime$CrimeDate, format = "%d-%m-%Y")
+str(london_crime$CrimeDate)
+head(london_crime$CrimeDate)
+
+
+borough_summary <- table(london_crime$Borough)
+barplot(borough_summary, main = "Crime Summary by Borough", xlab = "Borough", ylab = "Number of Crimes")
+borough_Highcrime <- names(borough_summary)[which.max(borough_summary)]
+print(paste("Borough  highest level of crime:", borough_Highcrime))
+borough_Lowcrime <- names(borough_summary)[which.min(borough_summary)]
+print(paste("Borough  lowest level of crime:", borough_Lowcrime))
+
+
+
