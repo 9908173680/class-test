@@ -1,30 +1,30 @@
-1 ST QUESTION  ANSWER 
+#1 ST QUESTION  ANSWER 
 
 london_crime =read.csv("london-crime-data.csv") 
 View(london_crime) #structure of the dataset str(london_crime) london_crime$Date <- paste(london_crime$day, london_crime$month, london_crime$year, sep = "-") london_crime <- london_crime[, !names(london_crime) %in% c("day", "month", 
 "year")] str(london_crime) 
 
 
-2nd Question answer 
+#2nd Question answer 
 
 
 london_crime <- london_crime[, c("borough", "major_category", "minor_category", "value", "Date")] names(london_crime) <- c("Borough", "MajorCategory", "SubCategory", "Value", "CrimeDate") str(london_crime) 
 
 
-3rd Question answer 
+#3rd Question answer 
 
 london_crime$CrimeDate <- as.Date(london_crime$CrimeDate, format = 
                                     "%d-%m-%Y") 
 str(london_crime$CrimeDate) 
 head(london_crime$CrimeDate) 
 
-4 th Question answer 
+#4 th Question answer 
 
 borough_summary <- table(london_crime$Borough) 
 barplot(borough_summary, main = "Crime Summary by Borough", xlab = "Borough", ylab = "Number of Crimes") 
 borough_Highcrime <- names(borough_summary)[which.max(borough_summary)] 
 print(paste("Borough  highest level of crime:", borough_Highcrime)) borough_Lowcrime <- names(borough_summary)[which.min(borough_summary)] print(paste("Borough  lowest level of crime:", borough_Lowcrime))  
-5 TH Question answer 
+#5 TH Question answer 
 
 
 # Aggregate crime values by MajorCategory 
@@ -42,7 +42,7 @@ pie(crime_values, main="Major Categories of Crime in London", col=rainbow(length
 
 
 
-6 th Question answer 
+#6 th Question answer 
 
 
 # Create a mapping of Borough to Region borough_to_region <- list(   "Barking and Dagenham" = "East", 
@@ -88,7 +88,7 @@ london_crime1$Region[is.na(london_crime1$Region)] <- 'Unknown' View(london_crime
 
 
 
-7 th Question answer 
+#7 th Question answer 
 
 
 # Aggregate crime values by Region 
@@ -105,7 +105,7 @@ text(crime_values_by_region$Region, crime_values_by_region$Value, labels=crime_v
      
      
      
-     8 th Question answer 
+ #    8 th Question answer 
      
      
      # Extract subset of data with the highest number of crimes 
@@ -139,7 +139,7 @@ text(crime_values_by_region$Region, crime_values_by_region$Value, labels=crime_v
      
      
      
-     # Save modified london_crime data frame as london-crimemodified.csv
+     # Saving modified london_crime data frame as london-crimemodified.csv
      write.csv(london_crime, "london-crimemodified.csv", row.names = FALSE) 
      
      
